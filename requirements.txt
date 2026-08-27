@@ -1,0 +1,9 @@
+# aion 项目依赖
+# 依赖声明唯一源：pyproject.toml（读取 [project] dependencies）
+# requirements.txt 已废弃 —— 安装请使用 pip install -e .
+#
+# 新增依赖请编辑 pyproject.toml，打包配置见 aion.spec
+alibaba-nls-python-sdk==1.0.2
+pydub==0.25.1
+types-pyaudio==0.2.16.20260508
+pyaudio==0.2.14

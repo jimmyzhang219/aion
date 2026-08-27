@@ -1,0 +1,116 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aion"
+version = "0.1.0"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.0",
+    "whatthepatch>=1.0.7",
+    "ddgs>=8.0.0",
+    "lark-oapi>=1.0.0",
+    "httpx>=0.25.0",
+    "qrcode>=7.0",
+    "cffi>=2.0.0",
+    "langchain>=1.3.9",
+    "langchain-core>=1.4.7",
+    "langchain-openai>=1.3.2",
+    "langchain-community>=0.4.2",
+    "langchain-ollama>=1.1.0",
+    "langchain-chroma>=1.1.0",
+    "langchain-deepseek>=1.1.0",
+    "langgraph>=1.2.5",
+    "rank-bm25>=0.2.2",
+    "tiktoken>=0.13.0",
+    "beautifulsoup4>=4.12",
+    "pydantic>=2.0",
+    "langfuse>=4.13.0",
+    "alibaba-nls-python-sdk>=1.0.2",
+    "pyaudio>=0.2.14",
+    "pydub>=0.25.1",
+    "websockets>=14.0",
+    "audioop-lts>=0.2.1",
+    "langchain-mcp-adapters>=0.3.0",
+    "puremagic>=2.2.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["aion", "aion.*"]
+
+[tool.setuptools.package-data]
+aion = ["llm/_encodings/*", "py.typed"]
+
+[project.scripts]
+aion = "aion.cli.main:main"
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.15.0",
+    "pre-commit>=4.0",
+    "mypy>=1.15",
+    "deptry>=0.20",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "pytest-mock>=3.14",
+]
+macos = [
+    "pyobjc>=10.0",
+]
+whisper = [
+    "faster-whisper>=1.1.0",
+    "webrtcvad>=2.0.10",
+]
+
+[tool.mypy]
+python_version = "3.14"
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = false  # # type: ignore 可能用于其他 type checker（如 Pyright）
+warn_no_return = true
+warn_return_any = false
+strict_optional = true
+check_untyped_defs = false
+disallow_untyped_defs = false
+no_implicit_optional = true
+
+# 忽略第三方包的类型 stub 缺失
+[[tool.mypy.overrides]]
+module = [
+    "langchain.*",
+    "langgraph.*",
+    "chromadb.*",
+    "pydantic.*",
+    "lark_oapi.*",
+    "qrcode.*",
+    "pydub",
+    "whatthepatch",
+    "bs4",
+]
+ignore_missing_imports = true
+disable_error_code = ["import-untyped"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["src"]
+markers = [
+    "integration: 需要真实外部服务（LLM/API/网络）的集成测试",
+]
+addopts = "-m 'not integration'"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+# 检查范围：未使用 import/变量、未定义变量、语法错误（等价 pyflakes）
+[tool.ruff.lint]
+select = ["F"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.format]
+quote-style = "double"
