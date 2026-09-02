@@ -11,6 +11,7 @@
 [![飞书](https://img.shields.io/badge/飞书-✓-3370FF)](https://www.feishu.cn)
 [![MCP](https://img.shields.io/badge/MCP-✓-5865F2)](https://modelcontextprotocol.io)
 [![Skills](https://img.shields.io/badge/Skills-✓-018bff)](docs/tools.md)
+![Status](https://img.shields.io/badge/status-frozen-lightgrey)
 
 </div>
 
@@ -18,6 +19,9 @@
 
 面向个人的多 Agent AI 助手：**多工作空间 → 多 Agent 协作 → 层次化记忆 → 工具生态**。  
 作者目前基于 macOS、DeepSeek/Ali Maas、飞书 使用，其它环境未涉及。
+
+> [!NOTE]
+> **项目已封板，不再新增功能。** 现有功能正在逐步迁移至 **DeepSeek-Harness（dsh）**，本仓库仅保留用于历史参考和必要的兼容性维护。
 
 ---
 
